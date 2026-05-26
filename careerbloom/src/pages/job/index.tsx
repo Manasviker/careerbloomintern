@@ -138,18 +138,23 @@ import React, { useEffect, useState } from "react";
     }
     fetchdata()
   },[])
+  // useEffect(() => {
+  //   const filtered = filteredJobs.filter((job:any) => {
+  //     const matchesCategory = job.category
+  //       .toLowerCase()
+  //       .includes(filter.category.toLowerCase());
+  //     const matchesLocation = job.location
+  //       .toLowerCase()
+  //       .includes(filter.location.toLowerCase());
+  //     return matchesCategory && matchesLocation;
+  //   });
+  //   setfilteredjobs(filtered);
+  // }, [filter, filteredJobs]);
+
   useEffect(() => {
-    const filtered = filteredJobs.filter((job:any) => {
-      const matchesCategory = job.category
-        .toLowerCase()
-        .includes(filter.category.toLowerCase());
-      const matchesLocation = job.location
-        .toLowerCase()
-        .includes(filter.location.toLowerCase());
-      return matchesCategory && matchesLocation;
-    });
-    setfilteredjobs(filtered);
-  }, [filter, filteredJobs]);
+    setfilteredjobs(filteredJobs);
+ }, [filteredJobs]);
+
   const handlefilterchange = (e: any) => {
     const { name, value, type, checked } = e.target;
     setfilters((prev) => ({
