@@ -52,7 +52,7 @@ const index = () => {
     useEffect(() => {
         const fetchdata = async () => {
           try {
-            const res = await axios.get("https://careerbloomintern.onrender.com/api/internship");
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/internship`);
                 
             setinternship(res.data)
             setfilteredInterships(res.data);

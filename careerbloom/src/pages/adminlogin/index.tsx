@@ -28,7 +28,7 @@ const index = () => {
     try {
       setisloading(true);
       const res = await axios.post(
-        "https://careerbloomintern.onrender.com/api/admin/adminlogin",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/adminlogin`,
         formadata
       );
       toast.success("logged in successfuly");

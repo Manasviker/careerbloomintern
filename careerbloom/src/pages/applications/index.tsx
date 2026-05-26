@@ -56,7 +56,7 @@ const index = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const res = await axios.get("https://careerbloomintern.onrender.com/api/application");
+        const res = await axios.get("${process.env.NEXT_PUBLIC_API_URL}/api/application");
         setdata(res.data);
       } catch (error) {
         console.log(error);
@@ -76,7 +76,7 @@ const index = () => {
   const handleacceptandreject = async (id: any, action: any) => {
     try {
       const res = await axios.put(
-        `https://careerbloomintern.onrender.com/api/application/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/application/${id}`,
         { action }
       );
       const updateappliacrtion = data.map((app: any) =>

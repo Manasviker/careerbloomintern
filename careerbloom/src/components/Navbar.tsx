@@ -7,6 +7,9 @@ import { signInWithPopup, signOut } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { selectuser } from '@/Feature/Userslice';
 import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
+import axios from 'axios';
 
 interface User {
     name: string;
@@ -20,10 +23,11 @@ const Navbar = () => {
     // const [user, setuser] = useState<User | null>(null);
     // const dropdownref = useRef(null)
     const user=useSelector(selectuser)
+    const { t } = useTranslation();
     const handlelogin = async () => {
         try {
-        await signInWithPopup(auth, provider)
-        // console.log(result)
+        const result=await signInWithPopup(auth, provider)
+        console.log(result.user);
         toast.success("Logged in successfully.")
 
     } catch (error) {
@@ -31,6 +35,71 @@ const Navbar = () => {
         toast.error("Login Failed");
     }
 }
+// const handleLanguageChange = (e:any) => {
+//     const selectedLanguage = e.target.value;
+ 
+//     i18n.changeLanguage(selectedLanguage);
+//  };
+// const handleLanguageChange = async (e:any) => {
+
+//     const selectedLanguage = e.target.value;
+ 
+//     if(selectedLanguage === "fr"){
+ 
+//        alert("OTP verification required for French language");
+ 
+//     }else{
+ 
+//        i18n.changeLanguage(selectedLanguage);
+ 
+//     }
+//  };
+const handleLanguageChange = async (e:any) => {
+
+    const selectedLanguage = e.target.value;
+ 
+    if(selectedLanguage === "fr"){
+ 
+       try{
+ 
+          await axios.post(
+             `${process.env.NEXT_PUBLIC_API_URL}/api/otp/send-otp`,
+             {
+                email: user.email
+             }
+          );
+ 
+          const enteredOTP = prompt("Enter OTP sent to your email");
+ 
+          const verify = await axios.post(
+             `${process.env.NEXT_PUBLIC_API_URL}/api/otp/verify-otp`,
+             {
+                otp: enteredOTP
+             }
+          );
+ 
+          if(verify.data.success){
+ 
+             i18n.changeLanguage("fr");
+ 
+             toast.success("French language enabled");
+ 
+          }
+ 
+       }catch(error){
+ 
+          console.log(error);
+ 
+          toast.error("Invalid OTP");
+ 
+       }
+ 
+    }else{
+ 
+       i18n.changeLanguage(selectedLanguage);
+ 
+    }
+ };
     // setuser({
     //     name: "Manasvi",
     //     email: "manasvi@gmail.com",
@@ -52,14 +121,19 @@ return (
                 <div className="hidden md:flex items-center gap-8 text-gray-700 font-medium">
                     <button >
                         <Link href="/internship" className="hover:text-blue-600">
-                            <span>Internships</span>
+                            {/* <span>Internships</span> */}
+                            <span> {t("internships")}</span>
                         </Link>
                     </button>
                     <button className="hover:text-blue-600">
                         <Link href="/job" >
-                            <span>Jobs</span>
+                            {/* <span>Jobs</span> */}
+                            <span> {t("jobs")}</span>
                         </Link>
                     </button>
+                    {/* <button onClick={() => i18n.changeLanguage("hi")}>
+  Hindi
+</button> */}
                     <div className="hidden md:flex items-center border rounded-md px-2 py-1">
                         <search />
                         <input type="text" placeholder='Search Opportunities....'
@@ -68,6 +142,17 @@ return (
                 </div>
 
                 <div className="flex items-center gap-3">
+                <select
+  onChange={handleLanguageChange}
+  className="border rounded-md px-2 py-1 text-black"
+>
+  <option value="en">English</option>
+  <option value="es">Spanish</option>
+  <option value="hi">Hindi</option>
+  <option value="pt">Portuguese</option>
+  <option value="zh">Chinese</option>
+  <option value="fr">French</option>
+</select>
                     {user ? (<div className="relative"> 
                     {/* ref={dropdownref} */}
                         <button
@@ -90,7 +175,8 @@ return (
                         </button>
                         <button onClick={handlelogout}
                             className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
-                            logout
+                            {/* logout */}
+                            {t("logout")}
                         </button>
                         {/* {isprofiledropdown &&(
                             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-md">

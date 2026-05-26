@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { auth } from "@/firebase/firebase";
 import { login,logout } from "@/Feature/Userslice";
 import { ToastContainer } from 'react-toastify';
+import "../i18n";
 
 export default function App({ Component, pageProps }: AppProps) {
   function AuthListener(){
