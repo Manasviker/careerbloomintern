@@ -63,18 +63,21 @@ const index = () => {
         fetchdata();
       }, []);
 
+    // useEffect(() => {
+    //     const filtered =internshipData.filter((internship:any)=>{
+    //         const matchesCategory=internship.category
+    //         .toLowerCase()
+    //         .includes(filter.category.toLowerCase());
+    //         const matchesLocation=internship.location
+    //         .toLowerCase()
+    //         .includes(filter.location.toLowerCase());
+    //         return matchesCategory && matchesLocation;
+    //     });
+    //     setfilteredInterships(filtered);
+    // },[filter,internshipData]);
     useEffect(() => {
-        const filtered =internshipData.filter((internship:any)=>{
-            const matchesCategory=internship.category
-            .toLowerCase()
-            .includes(filter.category.toLowerCase());
-            const matchesLocation=internship.location
-            .toLowerCase()
-            .includes(filter.location.toLowerCase());
-            return matchesCategory && matchesLocation;
-        });
-        setfilteredInterships(filtered);
-    },[filter,internshipData]);
+        setfilteredInterships(internshipData);
+     }, [internshipData]);
     const handlefilterchange=(e:any)=>{
         const {name,value,type,checked}=e.target;
         setfilters((prev)=>({ 

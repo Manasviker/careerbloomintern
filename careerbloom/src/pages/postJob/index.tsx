@@ -50,7 +50,7 @@ const index = () => {
     }
     try {
       setisloading(true);
-      const res = await axios.post("${process.env.NEXT_PUBLIC_API_URL}/api/job", formData);
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/job`, formData);
       toast.success("job posted successfuly");
       router.push("/adminpanel");
     } catch (error) {

@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const admin = require("./admin");
 require("dotenv").config();
+// console.log("EMAIL USER:", process.env.EMAIL_USER);
+// console.log("EMAIL PASS EXISTS:", !!process.env.EMAIL_PASS);
 
 const intern = require("./internship");
 const job = require("./job");
-const application=require("./application");
+const application= require("./application");
 const otp = require("./otp");
 
 

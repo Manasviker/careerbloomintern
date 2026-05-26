@@ -40,7 +40,7 @@ const index = () => {
     try {
       
       setisloading(true);
-      const res = await axios.post("${process.env.NEXT_PUBLIC_API_URL}/api/internship", formData);
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/internship`, formData);
       toast.success("Internship posted successfuly");
       router.push("/adminpanel");
     } catch (error) {
