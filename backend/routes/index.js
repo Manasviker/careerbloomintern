@@ -17,5 +17,12 @@ router.use("/job", job);
 router.use("/application", application);
 router.use("/otp", otp);
 
+const paymentRoutes = require("./paymentRoutes");
+
+router.use("/payment", paymentRoutes);
+
+const resume = require("./resume");
+router.use("/resume", resume);
+
 module.exports = router;
 

@@ -2,9 +2,10 @@
 import { selectuser } from "@/Feature/Userslice";
 import { ExternalLink, Mail, User } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
+import axios from "axios";
 interface User {
   name: string;
   email: string;
@@ -18,6 +19,18 @@ const index = () => {
   //     "",
   // });
 const user=useSelector(selectuser)
+
+const [resumes, setResumes] = useState<any[]>([]);
+const API = process.env.NEXT_PUBLIC_API_URL;
+
+useEffect(() => {
+  if (user?.email) {
+    axios
+      .get(`${API}/api/resume/user/${user.email}`)
+      .then((res) => setResumes(res.data))
+      .catch((err) => console.log(err));
+  }
+}, [user]);
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,6 +94,31 @@ const user=useSelector(selectuser)
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Link>
               </div>
+              <div className="mt-8">
+  <h2 className="text-xl font-bold mb-4">My Saved Resumes</h2>
+
+  {resumes.length === 0 ? (
+    <p>No resume created yet.</p>
+  ) : (
+    resumes.map((resume) => (
+      <div
+        key={resume._id}
+        className="border rounded-lg p-4 mb-3 bg-gray-50"
+      >
+        <h3 className="font-bold">{resume.name}</h3>
+        <p>{resume.email}</p>
+        <p>{resume.qualification}</p>
+
+        <Link
+          href={`/myresume?name=${resume.name}&email=${resume.email}&qualification=${resume.qualification}&experience=${resume.experience}&personalInfo=${resume.personalInfo}`}
+          className="text-blue-600 underline"
+        >
+          View Resume
+        </Link>
+      </div>
+    ))
+  )}
+</div>
             </div>
           </div>
         </div>

@@ -131,6 +131,12 @@ return (
                             <span> {t("jobs")}</span>
                         </Link>
                     </button>
+                    <button className="hover:text-blue-600">
+  <Link href="/resume">
+    <span>Resume</span>
+  </Link>
+</button>
+
                     {/* <button onClick={() => i18n.changeLanguage("hi")}>
   Hindi
 </button> */}
