@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <AuthListener/>
-      <div className="bg-white">
+      <div className="bg-white text-gray-900">
       <ToastContainer/>
         <Navbar />
         <Component {...pageProps} />
