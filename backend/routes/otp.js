@@ -22,25 +22,41 @@ router.post("/send-otp", async (req, res) => {
 //     greetingTimeout: 30000,
 //     socketTimeout: 60000,
 //   });
+// const transporter = nodemailer.createTransport({
+//   host: "smtp.gmail.com",
+//   port: 587,
+//   secure: false,
+//   auth: {
+//     user: process.env.EMAIL_USER,
+//     pass: process.env.EMAIL_PASS,
+//   },
+//   tls: {
+//     rejectUnauthorized: false,
+//   },
+// });
+
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
+  host: process.env.EMAIL_HOST,
+  port: Number(process.env.EMAIL_PORT),
   secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  tls: {
-    rejectUnauthorized: false,
-  },
 });
+//   const mailOptions = {
+//     from: process.env.EMAIL_USER,
+//     to: email,
+//     subject: "CareerBloom French Language OTP",
+//     text: `Your OTP is ${generatedOTP}`,
+//   };
 
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: "CareerBloom French Language OTP",
-    text: `Your OTP is ${generatedOTP}`,
-  };
+const mailOptions = {
+  from: process.env.EMAIL_FROM,
+  to: email,
+  subject: "CareerBloom French Language OTP",
+  text: `Your OTP is ${generatedOTP}`,
+};
 
   try {
     await transporter.verify();
