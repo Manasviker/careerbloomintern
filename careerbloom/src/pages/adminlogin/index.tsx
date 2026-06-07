@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Link from "next/link";
 
 const index = () => {
   const [formadata, setformadata] = useState({
@@ -100,7 +101,7 @@ const index = () => {
                 />
               </div>
             </div>
-            <div>
+            {/* <div>
               <button
                 type="submit"
                 disabled={isloading}
@@ -114,9 +115,34 @@ const index = () => {
                 ) : (
                   " Sign in"
                 )} 
-                {/* Sign in */}
+                
               </button>
-            </div>
+            </div> */}
+            <div>
+  <button
+    type="submit"
+    disabled={isloading}
+    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+  >
+    {isloading ? (
+      <div className="flex items-center">
+        <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2"></div>
+        Signing in...
+      </div>
+    ) : (
+      "Sign in"
+    )}
+  </button>
+
+  <div className="text-center mt-3">
+    <Link
+      href="/forgot-password"
+      className="text-blue-600 hover:text-blue-800 text-sm"
+    >
+      Forgot Password?
+    </Link>
+  </div>
+</div>
           </form>
         </div>
       </div>
