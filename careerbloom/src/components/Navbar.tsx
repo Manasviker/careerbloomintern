@@ -422,7 +422,7 @@ export default Navbar;
 //                         {/* {isprofiledropdown &&(
 //                             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-md">
 //                                 <p className="px-4 py-2 text-sm font-medium">{user.name}</p>
-//                                 <p className="px-4 py-2 text-sm text-gray-500">{user.email}</p>
+//                                 <p className="px-4 py-2 text-sm text-gray-900">{user.email}</p>
 //                             </div>
 //                         ) } */}
 //                     </div>) : (<>
@@ -445,7 +445,7 @@ export default Navbar;
 //     <span>Continue with Google</span>
 //   </button>
 
-//   <p className="text-xs text-gray-500 mt-1">
+//   <p className="text-xs text-gray-900 mt-1">
 //     Forgot password? Please reset it from your Google Account.
 //   </p>
 // </div>

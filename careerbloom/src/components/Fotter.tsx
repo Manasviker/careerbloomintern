@@ -109,7 +109,7 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <p className="mt-4 sm:mt-0 text-sm text-gray-400">
+          <p className="mt-4 sm:mt-0 text-sm text-gray-800">
             © Copyright 2026. All Rights Reserved.
           </p>
         </div>
@@ -131,7 +131,7 @@ function FooterSection({
     <div>
       <h2 className="font-semibold mb-3">{title}</h2>
 
-      <ul className="space-y-2 text-gray-400">
+      <ul className="space-y-2 text-gray-800">
         {items.map((item, index) => (
           <li
             key={index}

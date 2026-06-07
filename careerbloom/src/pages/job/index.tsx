@@ -358,13 +358,13 @@ import React, { useEffect, useState } from "react";
       </div>
       {/* Mobile Filters Modal */}
       {isFiltervisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden">
+        <div className="fixed inset-0 bg-black bg-opacity-100 z-50 md:hidden">
           <div className="bg-white h-full w-full max-w-sm ml-auto p-6 overflow-y-auto">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-lg font-bold">Filters</h2>
               <button
                 onClick={() => setisFiltervisible(false)}
-                className="text-gray-400 hover:text-gray-600"
+                className="text-gray-800 hover:text-gray-600"
               >
                 <X className="h-6 w-6" />
               </button>

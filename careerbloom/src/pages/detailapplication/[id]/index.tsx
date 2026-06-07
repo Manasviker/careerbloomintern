@@ -71,7 +71,7 @@ const index = () => {
               <div className="mb-8">
                 <div className="flex items-center mb-6">
                   <Building2 className="w-5 h-5 text-blue-600 mr-2" />
-                  <h2 className="text-sm font-medium text-gray-500">Company</h2>
+                  <h2 className="text-sm font-medium text-gray-900">Company</h2>
                 </div>
                 <h1 className="text-2xl font-bold text-gray-900 mb-4">
                   {data.company}
@@ -81,7 +81,7 @@ const index = () => {
               <div className="mb-8">
                 <div className="flex items-center mb-4">
                   <FileText className="w-5 h-5 text-blue-600 mr-2" />
-                  <h2 className="text-sm font-medium text-gray-500">
+                  <h2 className="text-sm font-medium text-gray-900">
                     Cover Letter
                   </h2>
                 </div>
@@ -94,7 +94,7 @@ const index = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <Calendar className="w-5 h-5 text-blue-600 mr-2" />
-                    <span className="text-sm font-medium text-gray-500">
+                    <span className="text-sm font-medium text-gray-900">
                       Application Date
                     </span>
                   </div>
@@ -110,7 +110,7 @@ const index = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <User className="w-5 h-5 text-blue-600 mr-2" />
-                    <span className="text-sm font-medium text-gray-500">
+                    <span className="text-sm font-medium text-gray-900">
                       Applied By
                     </span>
                   </div>

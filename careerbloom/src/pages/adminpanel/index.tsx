@@ -66,7 +66,7 @@ const index = () => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-900">
           Manage your jobs, internships, and applications
         </p>
       </div>
@@ -81,7 +81,7 @@ const index = () => {
             <div className="p-5">
               <div className="flex items-center">
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-500 truncate">
+                  <p className="text-sm font-medium text-gray-900 truncate">
                     {stat.label}
                   </p>
                   <p className="mt-1 text-3xl font-semibold text-gray-900">
@@ -116,7 +116,7 @@ const index = () => {
                   <h3 className="text-lg font-medium text-gray-900">
                     {item.title}
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-gray-900">
                     {item.description}
                   </p>
                 </div>

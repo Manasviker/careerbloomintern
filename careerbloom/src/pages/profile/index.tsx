@@ -62,7 +62,7 @@ useEffect(() => {
                 />
               ) : (
                 <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-gray-200 flex items-center justify-center">
-                  <User className="h-12 w-12 text-gray-400" />
+                  <User className="h-12 w-12 text-gray-800" />
                 </div>
               )}
             </div>
@@ -72,7 +72,7 @@ useEffect(() => {
           <div className="pt-16 pb-8 px-6">
             <div className="text-center mb-8">
               <h1 className="text-2xl font-bold text-gray-900">{user?.name}</h1>
-              <div className="mt-2 flex items-center justify-center text-gray-500">
+              <div className="mt-2 flex items-center justify-center text-gray-900">
                 <Mail className="h-4 w-4 mr-2" />
                 <span>{user?.email}</span>
               </div>
