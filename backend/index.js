@@ -25,3 +25,6 @@ app.use((req,res,next)=>{
 app.listen(port,()=>{
     console.log(`Server is running on the port ${port}`)
 })
+
+const forgotPasswordRoutes = require("./routes/forgotPassword");
+app.use("/api/forgot-password", forgotPasswordRoutes);
