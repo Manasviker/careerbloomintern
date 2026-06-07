@@ -24,5 +24,9 @@ router.use("/payment", paymentRoutes);
 const resume = require("./resume");
 router.use("/resume", resume);
 
+const publicSpace = require("./publicSpace");
+
+router.use("/public-space", publicSpace);
+
 module.exports = router;
 

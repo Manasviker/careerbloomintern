@@ -140,6 +140,11 @@ return (
                     {/* <button onClick={() => i18n.changeLanguage("hi")}>
   Hindi
 </button> */}
+<button className="hover:text-blue-600">
+  <Link href="/public-space">
+    <span>Public Space</span>
+  </Link>
+</button>
                     <div className="hidden md:flex items-center border rounded-md px-2 py-1">
                         <search />
                         <input type="text" placeholder='Search Opportunities....'
