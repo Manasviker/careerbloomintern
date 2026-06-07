@@ -388,7 +388,8 @@ return (
 >
   {mobileOpen ? <X size={28} /> : <Menu size={28} />}
 </button>
-                <div className="flex items-center gap-3">
+                {/* <div className="flex items-center gap-3"> */}
+                <div className="hidden md:flex items-center gap-3">
                 <select
   onChange={handleLanguageChange}
   className="border rounded-md px-2 py-1 text-black"
@@ -464,7 +465,7 @@ return (
                 </div>
             </div>
         </div>
-        {mobileOpen && (
+        {/* {mobileOpen && (
   <div className="md:hidden bg-white border-t p-4 flex flex-col gap-4 text-gray-900">
     <Link href="/internship">Internships</Link>
     <Link href="/job">Jobs</Link>
@@ -472,6 +473,31 @@ return (
     <Link href="/public-space">Public Space</Link>
     <Link href="/subscription">Plans</Link>
     <Link href="/adminlogin">Admin</Link>
+  </div>
+)} */}
+
+{mobileOpen && (
+  <div className="md:hidden bg-white border-t p-4 flex flex-col gap-4 text-gray-900">
+    <Link href="/internship">Internships</Link>
+    <Link href="/job">Jobs</Link>
+    <Link href="/resume">Resume</Link>
+    <Link href="/public-space">Public Space</Link>
+    <Link href="/subscription">Plans</Link>
+
+    <button
+      onClick={handlelogin}
+      className="border border-blue-500 text-blue-500 px-3 py-2 rounded-md text-sm"
+    >
+      Continue with Google
+    </button>
+
+    <p className="text-xs text-gray-900">
+      Forgot password? Please reset it from your Google Account.
+    </p>
+
+    <Link href="/adminlogin" className="text-gray-900">
+      Admin
+    </Link>
   </div>
 )}
     </nav>
