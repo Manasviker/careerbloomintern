@@ -224,7 +224,7 @@ import React, { useRef, useState } from 'react'
 import logo from "../Assets/logo.png"
 import Link from 'next/link';
 import { auth, provider } from "../firebase/firebase";
-import { ChevronDown, ChevronUp, Divide } from 'lucide-react';
+import { ChevronDown, ChevronUp, Divide, Menu, X } from 'lucide-react';
 import { signInWithPopup, signOut } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { selectuser } from '@/Feature/Userslice';
@@ -246,6 +246,7 @@ const Navbar = () => {
     // const dropdownref = useRef(null)
     const user=useSelector(selectuser)
     const { t } = useTranslation();
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     const handlelogin = async () => {
   try {
@@ -338,7 +339,7 @@ const handlelogout = () => {
     // setuser(null)
 };
 return (
-    <nav>
+    <nav className="relative">
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
             <div className='flex justify-between h-16 items-center'>
                 <div className='flex-shrink-0'>
@@ -381,7 +382,12 @@ return (
                             className="outline-none text-sm px-2" />
                     </div>
                 </div>
-
+<button
+  onClick={() => setMobileOpen(!mobileOpen)}
+  className="md:hidden text-gray-900"
+>
+  {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+</button>
                 <div className="flex items-center gap-3">
                 <select
   onChange={handleLanguageChange}
@@ -458,6 +464,16 @@ return (
                 </div>
             </div>
         </div>
+        {mobileOpen && (
+  <div className="md:hidden bg-white border-t p-4 flex flex-col gap-4 text-gray-900">
+    <Link href="/internship">Internships</Link>
+    <Link href="/job">Jobs</Link>
+    <Link href="/resume">Resume</Link>
+    <Link href="/public-space">Public Space</Link>
+    <Link href="/subscription">Plans</Link>
+    <Link href="/adminlogin">Admin</Link>
+  </div>
+)}
     </nav>
 
 );
