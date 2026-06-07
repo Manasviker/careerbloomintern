@@ -191,15 +191,34 @@ return (
                             </div>
                         ) } */}
                     </div>) : (<>
-                        <button onClick={handlelogin}
+                        {/* <button onClick={handlelogin}
                             className="border border-blue-500 text-blue-500 px-3 py-1 rounded-md text-sm hover:bg-blue-50">
                             <span> Continue with Google</span>
+                            
                         </button>
+                        
                         {/* <button>
                             {" "}
                             <Link href="/" className="bg-blue-500 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-600">
                             Register</Link>  </button> */}
-                        <a href="/adminlogin" className="text-gray-700 text-sm hover:text-blue-600">Admin</a></>
+                        {/* <a href="/adminlogin" className="text-gray-700 text-sm hover:text-blue-600">Admin</a> */} 
+                         <div className="flex flex-col items-center">
+  <button
+    onClick={handlelogin}
+    className="border border-blue-500 text-blue-500 px-3 py-1 rounded-md text-sm hover:bg-blue-50"
+  >
+    <span>Continue with Google</span>
+  </button>
+
+  <p className="text-xs text-gray-500 mt-1">
+    Forgot password? Please reset it from your Google Account.
+  </p>
+</div>
+
+<a href="/adminlogin" className="text-gray-700 text-sm hover:text-blue-600">
+  Admin
+</a>
+                        </>
                     )}
                 </div>
             </div>
