@@ -9,8 +9,9 @@ export default function Footer() {
       <div className="container mx-auto px-6">
 
         {/* Top Section */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-
+        {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6"> */}
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           <FooterSection
             title="Internship by places"
             items={[
@@ -109,7 +110,7 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <p className="mt-4 sm:mt-0 text-sm text-gray-800">
+          <p className="mt-4 sm:mt-0 text-sm text-gray-300">
             © Copyright 2026. All Rights Reserved.
           </p>
         </div>
@@ -131,7 +132,7 @@ function FooterSection({
     <div>
       <h2 className="font-semibold mb-3">{title}</h2>
 
-      <ul className="space-y-2 text-gray-800">
+      <ul className="space-y-2 text-gray-300">
         {items.map((item, index) => (
           <li
             key={index}
