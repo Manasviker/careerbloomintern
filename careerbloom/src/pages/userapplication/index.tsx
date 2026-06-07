@@ -66,7 +66,7 @@ const index = () => {
     };
     fetchdata();
   }, []);
-  const userapplication = Applications.filter(
+  const userapplication = data.filter(
     (app:any) => app.user?.name === user?.name
   );
   const filteredapplications = userapplication.filter((application:any) => {
@@ -217,7 +217,7 @@ const index = () => {
                       <div className="flex items-center text-sm text-gray-500">
                         <Calendar className="h-4 w-4 mr-1" />
                         {
-                          new Date(application.createAt)
+                          new Date(application.createdAt)
                             .toISOString()
                             .split("T")[0]
                         }
