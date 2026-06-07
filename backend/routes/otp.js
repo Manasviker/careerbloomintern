@@ -35,14 +35,28 @@ router.post("/send-otp", async (req, res) => {
 //   },
 // });
 
+// const transporter = nodemailer.createTransport({
+//   host: process.env.EMAIL_HOST,
+//   port: Number(process.env.EMAIL_PORT),
+//   secure: false,
+//   auth: {
+//     user: process.env.EMAIL_USER,
+//     pass: process.env.EMAIL_PASS,
+//   },
+// });
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: Number(process.env.EMAIL_PORT),
+  host: "smtp-relay.brevo.com",
+  port: 587,
   secure: false,
+  requireTLS: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  connectionTimeout: 120000,
+  greetingTimeout: 120000,
+  socketTimeout: 120000,
+  pool: false,
 });
 //   const mailOptions = {
 //     from: process.env.EMAIL_USER,
