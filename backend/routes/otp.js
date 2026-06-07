@@ -1,6 +1,7 @@
+
 const express = require("express");
 const router = express.Router();
-const nodemailer = require("nodemailer");
+const axios = require("axios");
 
 let generatedOTP = "";
 
@@ -9,8 +10,58 @@ router.post("/send-otp", async (req, res) => {
 
   generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
-  console.log("EMAIL_USER:", process.env.EMAIL_USER);
-  console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
+  try {
+    await axios.post(
+      "https://api.brevo.com/v3/smtp/email",
+      {
+        sender: {
+          name: "CareerBloom",
+          email: process.env.EMAIL_FROM,
+        },
+        to: [{ email }],
+        subject: "CareerBloom French Language OTP",
+        textContent: `Your OTP is ${generatedOTP}`,
+      },
+      {
+        headers: {
+          "api-key": process.env.BREVO_API_KEY,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    res.status(200).json({ success: true, message: "OTP sent" });
+  } catch (error) {
+    console.log("Brevo API Error:", error.response?.data || error.message);
+    res.status(500).json({ success: false, message: "Failed to send OTP" });
+  }
+});
+
+router.post("/verify-otp", (req, res) => {
+  const { otp } = req.body;
+
+  if (otp === generatedOTP) {
+    res.status(200).json({ success: true });
+  } else {
+    res.status(400).json({ success: false, message: "Invalid OTP" });
+  }
+});
+
+module.exports = router;
+
+// const express = require("express");
+// const router = express.Router();
+// const nodemailer = require("nodemailer");
+
+// let generatedOTP = "";
+
+// router.post("/send-otp", async (req, res) => {
+//   const { email } = req.body;
+
+//   generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+
+//   console.log("EMAIL_USER:", process.env.EMAIL_USER);
+//   console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
 
 //   const transporter = nodemailer.createTransport({
 //     service: "gmail",
@@ -44,20 +95,20 @@ router.post("/send-otp", async (req, res) => {
 //     pass: process.env.EMAIL_PASS,
 //   },
 // });
-const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  connectionTimeout: 120000,
-  greetingTimeout: 120000,
-  socketTimeout: 120000,
-  pool: false,
-});
+// const transporter = nodemailer.createTransport({
+//   host: "smtp-relay.brevo.com",
+//   port: 587,
+//   secure: false,
+//   requireTLS: true,
+//   auth: {
+//     user: process.env.EMAIL_USER,
+//     pass: process.env.EMAIL_PASS,
+//   },
+//   connectionTimeout: 120000,
+//   greetingTimeout: 120000,
+//   socketTimeout: 120000,
+//   pool: false,
+// });
 //   const mailOptions = {
 //     from: process.env.EMAIL_USER,
 //     to: email,
@@ -65,49 +116,49 @@ const transporter = nodemailer.createTransport({
 //     text: `Your OTP is ${generatedOTP}`,
 //   };
 
-const mailOptions = {
-  from: process.env.EMAIL_FROM,
-  to: email,
-  subject: "CareerBloom French Language OTP",
-  text: `Your OTP is ${generatedOTP}`,
-};
+// const mailOptions = {
+//   from: process.env.EMAIL_FROM,
+//   to: email,
+//   subject: "CareerBloom French Language OTP",
+//   text: `Your OTP is ${generatedOTP}`,
+// };
 
-  try {
-    await transporter.verify();
-    console.log("SMTP connection successful");
+//   try {
+//     await transporter.verify();
+//     console.log("SMTP connection successful");
 
-    await transporter.sendMail(mailOptions);
+//     await transporter.sendMail(mailOptions);
 
-    res.status(200).json({
-      success: true,
-      message: "OTP sent",
-    });
-  } catch (error) {
-    console.log("OTP Email Error:", error);
+//     res.status(200).json({
+//       success: true,
+//       message: "OTP sent",
+//     });
+//   } catch (error) {
+//     console.log("OTP Email Error:", error);
 
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-});
+//     res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// });
 
-router.post("/verify-otp", (req, res) => {
-  const { otp } = req.body;
+// router.post("/verify-otp", (req, res) => {
+//   const { otp } = req.body;
 
-  if (otp === generatedOTP) {
-    res.status(200).json({
-      success: true,
-    });
-  } else {
-    res.status(400).json({
-      success: false,
-      message: "Invalid OTP",
-    });
-  }
-});
+//   if (otp === generatedOTP) {
+//     res.status(200).json({
+//       success: true,
+//     });
+//   } else {
+//     res.status(400).json({
+//       success: false,
+//       message: "Invalid OTP",
+//     });
+//   }
+// });
 
-module.exports = router;
+// module.exports = router;
 // const express = require("express");
 // const router = express.Router();
 // const nodemailer = require("nodemailer");
