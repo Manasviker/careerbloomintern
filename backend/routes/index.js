@@ -9,7 +9,11 @@ const intern = require("./internship");
 const job = require("./job");
 const application= require("./application");
 const otp = require("./otp");
-
+const paymentRoutes = require("./paymentRoutes");
+const resume = require("./resume");
+const publicSpace = require("./publicSpace");
+const loginHistory = require("./loginHistory");
+const subscription = require("./subscription");
 
 router.use("/admin", admin);
 router.use("/internship", intern);
@@ -17,19 +21,17 @@ router.use("/job", job);
 router.use("/application", application);
 router.use("/otp", otp);
 
-const paymentRoutes = require("./paymentRoutes");
+
 
 router.use("/payment", paymentRoutes);
 
-const resume = require("./resume");
 router.use("/resume", resume);
-
-const publicSpace = require("./publicSpace");
 
 router.use("/public-space", publicSpace);
 
-const loginHistory = require("./loginHistory");
 router.use("/login-history", loginHistory);
+
+router.use("/subscription", subscription);
 
 module.exports = router;
 

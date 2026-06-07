@@ -217,6 +217,9 @@ return (
     <span>Public Space</span>
   </Link>
 </button>
+<Link href="/subscription">
+  <span>Plans</span>
+</Link>
                     <div className="hidden md:flex items-center border rounded-md px-2 py-1">
                         <search />
                         <input type="text" placeholder='Search Opportunities....'

@@ -48,11 +48,7 @@ const index = () => {
   const [searchTerm, setsearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
   const user=useSelector(selectuser)
-  // const [user, setuser] = useState<any>({
-  //   name: "Manasvi",
-  //   email: "manasvi@gmail.com",
-  //   photo:null
-  // });
+
 
   const [data, setdata] = useState<any>([]);
   useEffect(() => {
