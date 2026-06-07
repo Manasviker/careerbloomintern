@@ -24,17 +24,89 @@ const Navbar = () => {
     // const dropdownref = useRef(null)
     const user=useSelector(selectuser)
     const { t } = useTranslation();
-    const handlelogin = async () => {
-        try {
-        const result=await signInWithPopup(auth, provider)
-        console.log(result.user);
-        toast.success("Logged in successfully.")
 
-    } catch (error) {
-        console.error(error)
-        toast.error("Login Failed");
+    const handlelogin = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const email = result.user.email;
+
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/login-history/track-login`,
+        {
+          email: email,
+          otpVerified: true,
+        }
+      );
+
+      toast.success("Logged in successfully.");
+    } catch (trackError: any) {
+      console.error(trackError);
+
+      if (trackError.response?.data?.otpRequired) {
+        toast.warning("Login successful. Chrome OTP verification is required.");
+      } else if (trackError.response?.status === 403) {
+        toast.warning(trackError.response?.data?.message);
+      } else {
+        toast.warning("Login successful, but login history was not saved.");
+      }
     }
-}
+  } catch (error) {
+    console.error(error);
+    toast.error("Google Login Failed");
+  }
+};
+
+//     const handlelogin = async () => {
+//   try {
+//     const result = await signInWithPopup(auth, provider);
+
+//     const email = result.user.email;
+
+//     const res = await axios.post(
+//       `${process.env.NEXT_PUBLIC_API_URL}/api/login-history/track-login`,
+//       {
+//         email: email,
+//         otpVerified: false,
+//       }
+//     );
+
+//     toast.success("Logged in successfully.");
+//   } catch (error: any) {
+//     console.error(error);
+
+//     if (error.response?.data?.otpRequired) {
+//       toast.error("OTP verification required for Chrome login.");
+//     } else {
+//       toast.error(error.response?.data?.message || "Login Failed");
+//     }
+//   }
+// };
+//  } catch (trackError: any) {
+//       console.error(trackError);
+
+//       if (trackError.response?.data?.otpRequired) {
+//         toast.warning("Login successful. Chrome OTP verification is required.");
+//       } else {
+//         toast.warning("Login successful, but login history was not saved.");
+//       }
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     toast.error("Google Login Failed");
+//   }
+// };
+//     const handlelogin = async () => {
+//         try {
+//         const result=await signInWithPopup(auth, provider)
+//         console.log(result.user);
+//         toast.success("Logged in successfully.")
+
+//     } catch (error) {
+//         console.error(error)
+//         toast.error("Login Failed");
+//     }
+// }
 // const handleLanguageChange = (e:any) => {
 //     const selectedLanguage = e.target.value;
  

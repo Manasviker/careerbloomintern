@@ -28,5 +28,8 @@ const publicSpace = require("./publicSpace");
 
 router.use("/public-space", publicSpace);
 
+const loginHistory = require("./loginHistory");
+router.use("/login-history", loginHistory);
+
 module.exports = router;
 

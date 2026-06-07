@@ -21,7 +21,17 @@ const index = () => {
 const user=useSelector(selectuser)
 
 const [resumes, setResumes] = useState<any[]>([]);
+const [loginHistory, setLoginHistory] = useState<any[]>([]);
 const API = process.env.NEXT_PUBLIC_API_URL;
+
+// useEffect(() => {
+//   if (user?.email) {
+//     axios
+//       .get(`${API}/api/resume/user/${user.email}`)
+//       .then((res) => setResumes(res.data))
+//       .catch((err) => console.log(err));
+//   }
+// }, [user]);
 
 useEffect(() => {
   if (user?.email) {
@@ -29,8 +39,14 @@ useEffect(() => {
       .get(`${API}/api/resume/user/${user.email}`)
       .then((res) => setResumes(res.data))
       .catch((err) => console.log(err));
+
+    axios
+      .get(`${API}/api/login-history/${user.email}`)
+      .then((res) => setLoginHistory(res.data.history))
+      .catch((err) => console.log(err));
   }
 }, [user]);
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -115,6 +131,31 @@ useEffect(() => {
         >
           View Resume
         </Link>
+      </div>
+    ))
+  )}
+</div>
+<div className="mt-8">
+  <h2 className="text-xl font-bold mb-4">Login History</h2>
+
+  {loginHistory.length === 0 ? (
+    <p>No login history found.</p>
+  ) : (
+    loginHistory.map((item) => (
+      <div
+        key={item._id}
+        className="border rounded-lg p-4 mb-3 bg-gray-50"
+      >
+        <p><strong>Browser:</strong> {item.browser}</p>
+        <p><strong>Operating System:</strong> {item.os}</p>
+        <p><strong>Device:</strong> {item.deviceType}</p>
+        <p><strong>IP Address:</strong> {item.ipAddress}</p>
+        <p><strong>Status:</strong> {item.loginStatus}</p>
+        <p><strong>Reason:</strong> {item.reason}</p>
+        <p>
+          <strong>Date:</strong>{" "}
+          {new Date(item.createdAt).toLocaleString()}
+        </p>
       </div>
     ))
   )}
