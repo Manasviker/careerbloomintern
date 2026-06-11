@@ -2,6 +2,7 @@ import { ArrowUpRight, Calendar, Clock,  Filter, Pin, PlayCircle } from 'lucide-
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import axios from 'axios';
+import { useRouter } from "next/router";
 // const internshipData = [
 //     {
 //       _id: "1",
@@ -47,7 +48,8 @@ const index = () => {
         partTime:false,
         stipend:50,
     });
- 
+    const router = useRouter();
+    const { search } = router.query;
     const [internshipData,setinternship]=useState<any>([])
     useEffect(() => {
         const fetchdata = async () => {
@@ -66,6 +68,25 @@ const index = () => {
     useEffect(() => {
         setfilteredInterships(internshipData);
      }, [internshipData]);
+
+useEffect(() => {
+  if (!search) {
+    setfilteredInterships(internshipData);
+    return;
+  }
+
+  const searchText = String(search).toLowerCase();
+
+  const filtered = internshipData.filter((item: any) =>
+    item.title?.toLowerCase().includes(searchText) ||
+    item.company?.toLowerCase().includes(searchText) ||
+    item.category?.toLowerCase().includes(searchText) ||
+    item.location?.toLowerCase().includes(searchText)
+  );
+
+  setfilteredInterships(filtered);
+}, [search, internshipData]);
+
     const handlefilterchange=(e:any)=>{
         const {name,value,type,checked}=e.target;
         setfilters((prev)=>({ 

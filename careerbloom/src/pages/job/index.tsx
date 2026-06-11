@@ -3,7 +3,6 @@ import {
   ArrowUpRight,
   Calendar,
   Clock,
-  DollarSign,
   Filter,
   Pin,
   PlayCircle,
@@ -11,7 +10,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
+import { useRouter } from "next/router";
 
   //  const filteredJobs = [
   //   {
@@ -124,7 +123,9 @@ import React, { useEffect, useState } from "react";
     salary: 50,
     experience: "",
   });
-
+  
+  const router = useRouter();
+  const { search } = router.query;
   const [filteredJobs,setjob]=useState<any>([])
   useEffect(()=>{
     const fetchdata=async()=>{
@@ -151,10 +152,29 @@ import React, { useEffect, useState } from "react";
   //   setfilteredjobs(filtered);
   // }, [filter, filteredJobs]);
 
-  useEffect(() => {
-    setfilteredjobs(filteredJobs);
- }, [filteredJobs]);
+//   useEffect(() => {
+//     setfilteredjobs(filteredJobs);
+//  }, [filteredJobs]);
 
+useEffect(() => {
+  if (!search) {
+    setfilteredjobs(filteredJobs);
+    return;
+  }
+
+  const searchText = String(search).toLowerCase();
+
+  const filtered = filteredJobs.filter((item: any) =>
+    item.title?.toLowerCase().includes(searchText) ||
+    item.company?.toLowerCase().includes(searchText) ||
+    item.category?.toLowerCase().includes(searchText) ||
+    item.location?.toLowerCase().includes(searchText)
+  );
+
+  setfilteredjobs(filtered);
+}, [search, filteredJobs]);
+
+ 
   const handlefilterchange = (e: any) => {
     const { name, value, type, checked } = e.target;
     setfilters((prev) => ({

@@ -1,9 +1,9 @@
 
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import logo from "../Assets/logo.png"
 import Link from 'next/link';
 import { auth, provider } from "../firebase/firebase";
-import { ChevronDown, ChevronUp, Divide, Menu, X } from 'lucide-react';
+import { Menu, Search, X } from 'lucide-react';
 import { signInWithPopup, signOut } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { selectuser } from '@/Feature/Userslice';
@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import i18n from "@/i18n";
 import axios from 'axios';
+import { useRouter } from "next/router";
 
 interface User {
     name: string;
@@ -26,7 +27,15 @@ const Navbar = () => {
     const user=useSelector(selectuser)
     const { t } = useTranslation();
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchType, setSearchType] = useState("internship");
+const router = useRouter();
 
+const handleSearch = () => {
+  if (searchTerm.trim() !== "") {
+    router.push(`/${searchType}?search=${encodeURIComponent(searchTerm)}`);
+  }
+};
     const handlelogin = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
@@ -155,11 +164,43 @@ return (
 <Link href="/subscription">
   <span>{t("Plans")}</span>
 </Link>
-                    <div className="hidden md:flex items-center border rounded-md px-2 py-1">
+                    {/* <div className="hidden md:flex items-center border rounded-md px-2 py-1">
                         <search />
                         <input type="text" placeholder='Search Opportunities....'
                             className="outline-none text-sm px-2" />
-                    </div>
+                    </div> */}
+                    <div className="hidden md:flex items-center border rounded-md px-2 py-1">
+  <Search size={18} className="text-gray-600" />
+  
+
+<select
+  value={searchType}
+  onChange={(e) => setSearchType(e.target.value)}
+  className="text-sm text-black outline-none"
+>
+  <option value="internship">Internship</option>
+  <option value="job">Job</option>
+</select>
+  <input
+    type="text"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    onKeyDown={(e) => {
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    }}
+    placeholder="Search Opportunities..."
+    className="outline-none text-sm px-2 text-black"
+  />
+
+  <button
+    onClick={handleSearch}
+    className="text-sm text-blue-600"
+  >
+    Search
+  </button>
+</div>
                 </div>
 <button
   onClick={() => setMobileOpen(!mobileOpen)}
