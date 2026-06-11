@@ -209,7 +209,7 @@ useEffect(() => {
                     </div>
                     <div className='bg-white p-4 rounded-lg shadow-am mb-4 '>
                         <p className='text-center font-medium text-black'>
-                            {filteredInternships.length} Interships found
+                            {filteredInternships.length} Internships found
                         </p>
                     </div>
                     <div className='space-y-6'> 

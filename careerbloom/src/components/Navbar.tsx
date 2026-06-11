@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from "../Assets/logo.png"
 import Link from 'next/link';
 import { auth, provider } from "../firebase/firebase";
