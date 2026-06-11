@@ -56,7 +56,7 @@ const index = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const res = await axios.get("${process.env.NEXT_PUBLIC_API_URL}/api/application");
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/application`);
         setdata(res.data);
       } catch (error) {
         console.log(error);
@@ -67,11 +67,11 @@ const index = () => {
   // console.log(data);
   const filteredapplications = data.filter((application: any) => {
     const searchmatch =
-      application.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      application.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      application.user.name.toLowerCase().includes(searchTerm.toLowerCase());
+      application.company?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      application.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      application.user?.name?.toLowerCase().includes(searchTerm.toLowerCase());
     if (filter === "all") return searchmatch;
-    return searchmatch && application.status.toLowerCase() === filter;
+    return searchmatch && application.status?.toLowerCase() === filter;
   });
   const handleacceptandreject = async (id: any, action: any) => {
     try {
