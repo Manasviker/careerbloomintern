@@ -60,36 +60,3 @@ return (
   </div>
 );
 }
-//   return (
-//     <div id="resumeArea"className="max-w-3xl mx-auto p-8 border mt-8">
-//       <div
-//   id="resumeArea"
-//   style={{
-//     backgroundColor: "#ffffff",
-//     color: "#000000",
-//     border: "1px solid #000000",
-//     padding: "32px",
-//     maxWidth: "768px",
-//     margin: "32px auto",
-//   }}
-// ></div>
-//       <h1 className="text-3xl font-bold text-center mb-6">{data.name}</h1>
-
-//       <p><b>Email:</b> {data.email}</p>
-//       <p><b>Qualification:</b> {data.qualification}</p>
-//       <p><b>Experience:</b> {data.experience}</p>
-
-//       <h2 className="text-xl font-bold mt-5">Personal Information</h2>
-//       <p>{data.personalInfo}</p>
-//       <div className="text-center mt-5">
-//   <button
-//     onClick={downloadPDF}
-//     className="bg-green-600 text-white px-6 py-3 rounded"
-//   >
-//     Download Resume PDF
-//   </button>
-// </div>
-//     </div>
-    
-//   );
-// }
