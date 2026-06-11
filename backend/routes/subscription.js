@@ -27,10 +27,10 @@ router.post("/create-order", async (req, res) => {
       })
     );
 
-    if (currentHour < 10 || currentHour >= 11) {
+    if (currentHour < 10 || currentHour >= 22) {
       return res.status(403).json({
         success: false,
-        message: "Payments are allowed only between 10:00 AM and 11:00 AM IST.",
+        message: "Payments are allowed only between 10:00 AM and 10:00 PM IST.",
       });
     }
 
