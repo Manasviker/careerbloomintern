@@ -59,6 +59,7 @@ return (
     </div>
   </div>
 );
+}
 //   return (
 //     <div id="resumeArea"className="max-w-3xl mx-auto p-8 border mt-8">
 //       <div
