@@ -19,7 +19,7 @@ router.post("/send-otp", async (req, res) => {
           email: process.env.EMAIL_FROM,
         },
         to: [{ email }],
-        subject: "CareerBloom French Language OTP",
+        subject: "CareerBloom send a OTP",
         textContent: `Your OTP is ${generatedOTP}`,
       },
       {

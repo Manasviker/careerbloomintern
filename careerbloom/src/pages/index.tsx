@@ -164,9 +164,12 @@ export default function SvgSlider() {
                 Find internships & jobs from top companies
               </p>
 
-              <button className="mt-6 bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">
-                Explore Now
-              </button>
+              <Link
+  href="#opportunities"
+  className="mt-6 bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200"
+>
+  Explore Now
+</Link>
             </div>
           </SwiperSlide>
         ))}
@@ -192,26 +195,8 @@ export default function SvgSlider() {
           </button>
         ))}
       </div>
-      <div className="mb-12">
-
-        <h2 className="text-3xl font-bold text-center mb-8">
-          Latest internships on Career Bloom
-        </h2>
-        <div className="flex flex-wrap gap-4">
-          <span className="text-grey-700 font-medium">Popular Categories</span>
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full transition-colors ${selectedCategory === category ? "bg-blue-600 text-white" : "bg-grey-100 text-gray-700 hover:bg-gray-200"
-                }`
-              }>
-              {category}
-            </button>
-          ))}
-        </div>
-      </div><br></br>
-      <h2 className="text-3xl font-bold text-center mb-8">
+      
+      <h2 id="opportunities" className="text-3xl font-bold text-center mb-8">
         Latest Internships
       </h2>
       {/* internship grid*/}
@@ -373,19 +358,4 @@ export default function SvgSlider() {
   );
 }
 
-/*import { Geist, Geist_Mono } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export default function Home() {
-  return null
-}
-*/
