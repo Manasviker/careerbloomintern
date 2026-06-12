@@ -65,27 +65,81 @@ const index = () => {
         fetchdata();
       }, []);
 
-    useEffect(() => {
-        setfilteredInterships(internshipData);
-     }, [internshipData]);
+    // useEffect(() => {
+    //     setfilteredInterships(internshipData);
+    //  }, [internshipData]);
 
-useEffect(() => {
-  if (!search) {
-    setfilteredInterships(internshipData);
-    return;
+    useEffect(() => {
+  let result = internshipData;
+
+  if (search) {
+    const searchText = String(search).toLowerCase();
+
+    result = result.filter((item: any) =>
+      item.title?.toLowerCase().includes(searchText) ||
+      item.company?.toLowerCase().includes(searchText) ||
+      item.category?.toLowerCase().includes(searchText) ||
+      item.location?.toLowerCase().includes(searchText) ||
+      item.whoCanApply?.toLowerCase().includes(searchText) ||
+      item.aboutInternship?.toLowerCase().includes(searchText) ||
+      item.additionalInfo?.toLowerCase().includes(searchText)
+    );
   }
 
-  const searchText = String(search).toLowerCase();
+  if (filter.category) {
+    const categoryText = filter.category.toLowerCase();
 
-  const filtered = internshipData.filter((item: any) =>
-    item.title?.toLowerCase().includes(searchText) ||
-    item.company?.toLowerCase().includes(searchText) ||
-    item.category?.toLowerCase().includes(searchText) ||
-    item.location?.toLowerCase().includes(searchText)
-  );
+    result = result.filter((item: any) =>
+      item.category?.toLowerCase().includes(categoryText) ||
+      item.title?.toLowerCase().includes(categoryText) ||
+      item.whoCanApply?.toLowerCase().includes(categoryText) ||
+      item.aboutInternship?.toLowerCase().includes(categoryText) ||
+      item.additionalInfo?.toLowerCase().includes(categoryText) ||
+      item.location?.toLowerCase().includes(categoryText)
+    );
+  }
 
-  setfilteredInterships(filtered);
-}, [search, internshipData]);
+  if (filter.location) {
+    result = result.filter((item: any) =>
+      item.location?.toLowerCase().includes(filter.location.toLowerCase())
+    );
+  }
+
+  if (filter.workFromHome) {
+    result = result.filter((item: any) =>
+      item.location?.toLowerCase().includes("remote") ||
+      item.location?.toLowerCase().includes("work from home")
+    );
+  }
+
+  if (filter.partTime) {
+    result = result.filter((item: any) =>
+      item.aboutInternship?.toLowerCase().includes("part-time") ||
+      item.aboutInternship?.toLowerCase().includes("part time") ||
+      item.additionalInfo?.toLowerCase().includes("part-time") ||
+      item.additionalInfo?.toLowerCase().includes("part time")
+    );
+  }
+
+  setfilteredInterships(result);
+}, [search, filter, internshipData]);
+// useEffect(() => {
+//   if (!search) {
+//     setfilteredInterships(internshipData);
+//     return;
+//   }
+
+//   const searchText = String(search).toLowerCase();
+
+//   const filtered = internshipData.filter((item: any) =>
+//     item.title?.toLowerCase().includes(searchText) ||
+//     item.company?.toLowerCase().includes(searchText) ||
+//     item.category?.toLowerCase().includes(searchText) ||
+//     item.location?.toLowerCase().includes(searchText)
+//   );
+
+//   setfilteredInterships(filtered);
+// }, [search, internshipData]);
 
     const handlefilterchange=(e:any)=>{
         const {name,value,type,checked}=e.target;
@@ -155,7 +209,7 @@ useEffect(() => {
                             <label className='flex items-center space-x-2'>
                             
                             <input 
-                            type="text"
+                            type="Checkbox"
                             name='workFromHome'
                             checked={filter.workFromHome}
                             onChange={handlefilterchange}
@@ -166,7 +220,7 @@ useEffect(() => {
                             <label className='flex items-center space-x-2'>
                             
                             <input 
-                            type="text"
+                            type="checkbox"
                             name='partTime'
                             checked={filter.partTime}
                             onChange={handlefilterchange}

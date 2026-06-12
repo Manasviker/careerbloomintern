@@ -116,15 +116,101 @@ export default function SvgSlider() {
 
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const filteredInternships = internships.filter(
-    (item:any) =>
-      !selectedCategory || item.category === selectedCategory
-  );
+  // const filteredInternships = internships.filter(
+  //   (item:any) =>
+  //     !selectedCategory || item.category === selectedCategory
+  // );
 
-  const filteredJobs = jobs.filter(
-    (item:any) =>
-      !selectedCategory || item.category === selectedCategory
+  // const filteredJobs = jobs.filter(
+  //   (item:any) =>
+  //     !selectedCategory || item.category === selectedCategory
+  // );
+
+  const matchCategory = (item: any, type: "internship" | "job") => {
+  if (!selectedCategory) return true;
+
+  const text = selectedCategory.toLowerCase();
+
+  const aboutText =
+    type === "internship"
+      ? item.aboutInternship?.toLowerCase()
+      : item.aboutJob?.toLowerCase();
+
+  return (
+    item.category?.toLowerCase().includes(text) ||
+    item.title?.toLowerCase().includes(text) ||
+    item.location?.toLowerCase().includes(text) ||
+    item.whoCanApply?.toLowerCase().includes(text) ||
+    aboutText?.includes(text) ||
+    item.AdditionalInfo?.toLowerCase().includes(text) ||
+    item.perks?.toLowerCase().includes(text)
   );
+};
+
+const filteredInternships = internships.filter((item: any) => {
+  if (selectedCategory === "Work From Home") {
+    return (
+      item.location?.toLowerCase().includes("remote") ||
+      item.location?.toLowerCase().includes("work from home") ||
+      item.AdditionalInfo?.toLowerCase().includes("work-from-home") ||
+      item.AdditionalInfo?.toLowerCase().includes("work from home")
+    );
+  }
+
+  if (selectedCategory === "Part-Time") {
+    return (
+      item.aboutInternship?.toLowerCase().includes("part-time") ||
+      item.aboutInternship?.toLowerCase().includes("part time") ||
+      item.AdditionalInfo?.toLowerCase().includes("part-time") ||
+      item.AdditionalInfo?.toLowerCase().includes("part time")
+    );
+  }
+
+  if (selectedCategory === "Engineering") {
+    return (
+      item.category?.toLowerCase().includes("engineering") ||
+      item.category?.toLowerCase().includes("software development") ||
+      item.whoCanApply?.toLowerCase().includes("engineering") ||
+      item.whoCanApply?.toLowerCase().includes("btech") ||
+      item.whoCanApply?.toLowerCase().includes("be")
+    );
+  }
+
+  return matchCategory(item, "internship");
+});
+
+const filteredJobs = jobs.filter((item: any) => {
+  if (selectedCategory === "Work From Home") {
+    return (
+      item.location?.toLowerCase().includes("remote") ||
+      item.location?.toLowerCase().includes("work from home") ||
+      item.AdditionalInfo?.toLowerCase().includes("work-from-home") ||
+      item.AdditionalInfo?.toLowerCase().includes("work from home") ||
+      item.perks?.toLowerCase().includes("remote")
+    );
+  }
+
+  if (selectedCategory === "Part-Time") {
+    return (
+      item.aboutJob?.toLowerCase().includes("part-time") ||
+      item.aboutJob?.toLowerCase().includes("part time") ||
+      item.AdditionalInfo?.toLowerCase().includes("part-time") ||
+      item.AdditionalInfo?.toLowerCase().includes("part time")
+    );
+  }
+
+  if (selectedCategory === "Engineering") {
+    return (
+      item.category?.toLowerCase().includes("engineering") ||
+      item.category?.toLowerCase().includes("software development") ||
+      item.whoCanApply?.toLowerCase().includes("engineering") ||
+      item.whoCanApply?.toLowerCase().includes("btech") ||
+      item.whoCanApply?.toLowerCase().includes("be")
+    );
+  }
+
+  return matchCategory(item, "job");
+});
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

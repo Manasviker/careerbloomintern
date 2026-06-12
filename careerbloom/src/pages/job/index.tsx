@@ -156,24 +156,44 @@ import { useRouter } from "next/router";
 //     setfilteredjobs(filteredJobs);
 //  }, [filteredJobs]);
 
+// useEffect(() => {
+//   if (!search) {
+//     setfilteredjobs(filteredJobs);
+//     return;
+//   }
+
+//   const searchText = String(search).toLowerCase();
+
+//   const filtered = filteredJobs.filter((item: any) =>
+//     item.title?.toLowerCase().includes(searchText) ||
+//     item.company?.toLowerCase().includes(searchText) ||
+//     item.category?.toLowerCase().includes(searchText) ||
+//     item.location?.toLowerCase().includes(searchText)
+//   );
+
+//   setfilteredjobs(filtered);
+// }, [search, filteredJobs]);
+
+
 useEffect(() => {
-  if (!search) {
-    setfilteredjobs(filteredJobs);
-    return;
+  let result = filteredJobs;
+
+  if (search) {
+    const searchText = String(search).toLowerCase();
+
+    result = result.filter((item: any) =>
+      item.title?.toLowerCase().includes(searchText) ||
+      item.company?.toLowerCase().includes(searchText) ||
+      item.category?.toLowerCase().includes(searchText) ||
+      item.location?.toLowerCase().includes(searchText) ||
+      item.whoCanApply?.toLowerCase().includes(searchText) ||
+      item.aboutJob?.toLowerCase().includes(searchText) ||
+      item.AdditionalInfo?.toLowerCase().includes(searchText)
+    );
   }
 
-  const searchText = String(search).toLowerCase();
-
-  const filtered = filteredJobs.filter((item: any) =>
-    item.title?.toLowerCase().includes(searchText) ||
-    item.company?.toLowerCase().includes(searchText) ||
-    item.category?.toLowerCase().includes(searchText) ||
-    item.location?.toLowerCase().includes(searchText)
-  );
-
-  setfilteredjobs(filtered);
+  setfilteredjobs(result);
 }, [search, filteredJobs]);
-
  
   const handlefilterchange = (e: any) => {
     const { name, value, type, checked } = e.target;
