@@ -34,7 +34,32 @@ export default function Resume() {
 //     alert("OTP will be sent to: " + formData.email);
 //   };
 
+// const sendOtp = async () => {
+//   try {
+//     await axios.post(`${API}/api/otp/send-otp`, {
+//       email: formData.email,
+//     });
+
+//     alert("OTP sent to your email");
+//   } catch (error) {
+//     alert("Failed to send OTP");
+//     console.log(error);
+//   }
+// };
+
 const sendOtp = async () => {
+  if (
+    !formData.name ||
+    !formData.email ||
+    !formData.qualification ||
+    !formData.experience ||
+    !formData.personalInfo ||
+    !formData.resumeFile
+  ) {
+    alert("Please fill all required fields and upload your resume file.");
+    return;
+  }
+
   try {
     await axios.post(`${API}/api/otp/send-otp`, {
       email: formData.email,
@@ -150,6 +175,7 @@ const handlePayment = async () => {
         placeholder="Full Name"
         onChange={handleChange}
         className="border p-3 w-full mb-3"
+        required
       />
 
       <input
@@ -158,6 +184,7 @@ const handlePayment = async () => {
         placeholder="Registered Email"
         onChange={handleChange}
         className="border p-3 w-full mb-3"
+        required
       />
 
       <input
@@ -166,6 +193,7 @@ const handlePayment = async () => {
         placeholder="Qualification"
         onChange={handleChange}
         className="border p-3 w-full mb-3"
+        required
       />
 
       <input
@@ -174,6 +202,7 @@ const handlePayment = async () => {
         placeholder="Experience"
         onChange={handleChange}
         className="border p-3 w-full mb-3"
+        required
       />
 
       <textarea
@@ -181,11 +210,13 @@ const handlePayment = async () => {
         placeholder="Personal Information"
         onChange={handleChange}
         className="border p-3 w-full mb-3"
+        required
       />
 
       <input
   type="file"
   accept=".pdf,.doc,.docx"
+  required
   onChange={(e) =>
     setFormData({
       ...formData,
@@ -213,6 +244,7 @@ const handlePayment = async () => {
       <input
         type="text"
         placeholder="Enter OTP"
+        required
         onChange={(e) => setOtp(e.target.value)}
         className="border p-3 mb-3 mt-4 w-full"
       />
