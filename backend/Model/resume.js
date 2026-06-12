@@ -17,6 +17,9 @@ const resumeSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  resumeFile: {
+  type: String,
+},
 });
 
 module.exports = mongoose.model("Resume", resumeSchema);

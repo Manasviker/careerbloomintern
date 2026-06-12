@@ -7,13 +7,14 @@ import axios from "axios";
 import Script from "next/script";
 
 export default function Resume() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     name: "",
     email: "",
     qualification: "",
     experience: "",
     personalInfo: "",
     photo: "",
+    resumeFile: null,
   });
 
   const [otp, setOtp] = useState("");
@@ -88,19 +89,45 @@ const handlePayment = async () => {
     //     console.log(paymentResponse);
     //   },
 
+//     handler: async function (paymentResponse: any) {
+//   await axios.post(`${API}/api/resume/create`, {
+//     ...formData,
+//     paymentId: paymentResponse.razorpay_payment_id,
+//     orderId: paymentResponse.razorpay_order_id,
+//     status: "paid",
+//   });
+
+//   alert("Payment Successful! Resume saved to profile.");
+//   window.location.href = `/myresume?name=${formData.name}&email=${formData.email}&qualification=${formData.qualification}&experience=${formData.experience}&personalInfo=${formData.personalInfo}`;
+// },
+//     };
     handler: async function (paymentResponse: any) {
-  await axios.post(`${API}/api/resume/create`, {
-    ...formData,
-    paymentId: paymentResponse.razorpay_payment_id,
-    orderId: paymentResponse.razorpay_order_id,
-    status: "paid",
+  const data = new FormData();
+
+  data.append("name", formData.name);
+  data.append("email", formData.email);
+  data.append("qualification", formData.qualification);
+  data.append("experience", formData.experience);
+  data.append("personalInfo", formData.personalInfo);
+  data.append("photo", formData.photo);
+  data.append("paymentId", paymentResponse.razorpay_payment_id);
+  data.append("orderId", paymentResponse.razorpay_order_id);
+  data.append("status", "paid");
+
+  if (formData.resumeFile) {
+    data.append("resumeFile", formData.resumeFile);
+  }
+
+  await axios.post(`${API}/api/resume/create`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
   });
 
   alert("Payment Successful! Resume saved to profile.");
   window.location.href = `/myresume?name=${formData.name}&email=${formData.email}&qualification=${formData.qualification}&experience=${formData.experience}&personalInfo=${formData.personalInfo}`;
 },
     };
-
     const razorpay = new (window as any).Razorpay(options);
     razorpay.open();
   } catch (error) {
@@ -157,12 +184,24 @@ const handlePayment = async () => {
       />
 
       <input
+  type="file"
+  accept=".pdf,.doc,.docx"
+  onChange={(e) =>
+    setFormData({
+      ...formData,
+      resumeFile: e.target.files?.[0],
+    })
+  }
+/>
+
+      <input
         type="text"
         name="photo"
         placeholder="Photo URL"
         onChange={handleChange}
         className="border p-3 w-full mb-3"
       />
+
 
       <button
         onClick={sendOtp}

@@ -31,7 +31,7 @@ connect();
 app.listen(port, () => {
   console.log(`Server is running on the port ${port}`);
 });
-
+app.use("/uploads", express.static("uploads"));
 // const bodyparser=require("body-parser")
 // const express=require("express")
 // const app=express()

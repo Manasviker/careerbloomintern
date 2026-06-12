@@ -39,6 +39,13 @@ const index = () => {
           color: 'bg-purple-600',
         },
         {
+          title: 'View User Resumes',
+          description: 'View resumes created by users',
+          icon: Users,
+          link: '/adminresumes',
+          color: 'bg-indigo-600',
+        },
+        {
           title: 'Manage Users',
           description: 'View and manage user accounts',
           icon: Users,
