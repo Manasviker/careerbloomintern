@@ -270,7 +270,7 @@ useEffect(() => {
                   value={filter.experience}
                   onChange={handlefilterchange}
                   className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-700"
-                  placeholder="e.g. Mumbai"
+                  placeholder="e.g. Fresher, 1-2 years"
                 />
               </div>
 
@@ -448,7 +448,7 @@ useEffect(() => {
                   value={filter.experience}
                   onChange={handlefilterchange}
                   className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-700"
-                  placeholder="e.g. Mumbai"
+                  placeholder="e.g. Fresher, 1-2 years"
                 />
               </div>
               {/* Checkboxes */}

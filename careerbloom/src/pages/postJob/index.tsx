@@ -90,7 +90,7 @@ const index = () => {
                     value={formData.title}
                     onChange={handleChange}
                     className="text-black  mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                    placeholder="e.g. Frontend Developer Intern"
+                    placeholder="e.g. Frontend Developer "
                   />
                 </div>
 
@@ -181,7 +181,7 @@ const index = () => {
                   onChange={handleChange}
                   rows={4}
                   className="text-black mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  placeholder="Describe the internship role..."
+                  placeholder="Describe the Job role..."
                 />
               </div>
             </div>
@@ -256,7 +256,7 @@ const index = () => {
                   value={formData.CTC}
                   onChange={handleChange}
                   className="text-black mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                  placeholder="e.g. ₹10 LPAn"
+                  placeholder="e.g. ₹10 LPA"
                 />
               </div>
 
